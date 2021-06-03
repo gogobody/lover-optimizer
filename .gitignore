@@ -1,0 +1,8 @@
+node_modules
+_res/ignore/
+.DS_Store
+dist/dist
+.idea/
+/css/.sass-cache/
+/.htaccess
+/nginx.htaccess
