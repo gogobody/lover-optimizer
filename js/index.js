@@ -19,7 +19,7 @@ function _toConsumableArray(arr) {
 
 class Robot {
     constructor() {
-        self.api = "http://api.tianapi.com/txapi/robot/index"
+        self.api = "https://api.tianapi.com/txapi/robot/index"
         self.apiKey = '1163bbd3f06548be85c4202e761205f9'
         self.userId = "bot"
     }
