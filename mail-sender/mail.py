@@ -151,12 +151,14 @@ def sendQQMail():
     # print(mail_msg)
     message = MIMEText(mail_msg, 'HTML', encoding)
     message['From'] = Header('{}<{}>'.format(boyname, mail_user), encoding)
-    if type(receivers) == 'str':
+    if type(receivers) == str:
         message['To'] = '{}<{}>'.format(girlname, receivers)
     else:
         message['To'] = ','.join('receiver_name{}<{}>'.format(index, i) for index, i in enumerate(receivers))
 
     subject = application['name']
+    print(message['From'])
+    print(message['To'])
     message['Subject'] = Header(subject, 'utf-8')
 
     smtpObj = smtplib.SMTP_SSL(mail_host, mail_port)
