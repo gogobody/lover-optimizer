@@ -25,9 +25,14 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
 }
 
+# 获取当前文件路径
+current_path = os.path.abspath(__file__)
+father_path = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
+config_path = os.path.join(father_path, 'config.yml')
+
 
 # 读取yml配置
-def getYmlConfig(yaml_file='config.yml'):
+def getYmlConfig(yaml_file=config_path):
     file = open(yaml_file, 'r', encoding="utf-8")
     file_data = file.read()
     file.close()
@@ -124,6 +129,8 @@ def getMessage():
 def sendQQMail():
     mail_host = application['mail']['host']
     mail_port = application['mail']['port']
+    boyname = girlfriend['boyname']
+    girlname = girlfriend['girlname']
     try:
         mail_user = os.environ['FROM_ADDR']
     except KeyError:
@@ -139,9 +146,10 @@ def sendQQMail():
     encoding = application['mail']['default-encoding']
 
     mail_msg = getMessage()
-    print(mail_msg)
-    message = MIMEText(mail_msg, 'plain', encoding)
-    message['From'] = Header(mail_user, encoding)
+    # print(mail_msg)
+    message = MIMEText(mail_msg, 'HTML', encoding)
+    message['From'] = Header('{}<{}>'.format(boyname, mail_user), encoding)
+    message['To'] = ','.join('receiver_name{}<{}>'.format(index, i) for index, i in enumerate(receivers))
 
     subject = application['name']
     message['Subject'] = Header(subject, 'utf-8')
