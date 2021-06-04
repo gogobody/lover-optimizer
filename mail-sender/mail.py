@@ -29,7 +29,9 @@ headers = {
 current_path = os.path.abspath(__file__)
 father_path = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
 config_path = os.path.join(father_path, 'config.yml')
+template_path = os.path.join(father_path, 'template.html')
 
+print("config_path:", config_path)
 
 # 读取yml配置
 def getYmlConfig(yaml_file=config_path):
@@ -108,7 +110,7 @@ def getMessage():
     clothes_tip = tomorrow['index'][3]['desc']
 
     img, desc = getImgWords()
-    with open('template.html', encoding='utf-8') as f:
+    with open(template_path, encoding='utf-8') as f:
         html = f.read()
         today_w = '今天 {} {}/{} 空气指数:{} 日出日落: {}/{}'.format(today['wea'], today['tem1'], today['tem2'],
                                                            today['air_level'], today['sunrise'], today['sunset'])
