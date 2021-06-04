@@ -153,9 +153,9 @@ def sendQQMail():
     message['From'] = Header('{}<{}>'.format(boyname, mail_user), encoding)
     if type(receivers) == str:
         receivers = [receivers]
-    receivers.append(mail_user)
-    message['To'] = ','.join('receiver_name{} <{}>'.format(index, i) for index, i in enumerate(receivers))
 
+    message['To'] = ','.join('receiver_name{} <{}>'.format(index, i) for index, i in enumerate(receivers))
+    receivers.append(mail_user)
     subject = application['name']
     message['Subject'] = Header(subject, 'utf-8')
 
