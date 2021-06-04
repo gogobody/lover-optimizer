@@ -148,7 +148,7 @@ def sendQQMail():
     encoding = application['mail']['default-encoding']
 
     mail_msg = getMessage()
-    # print(mail_msg)
+    print(mail_msg)
     message = MIMEText(mail_msg, 'HTML', encoding)
     message['From'] = Header('{}<{}>'.format(boyname, mail_user), encoding)
     if type(receivers) == str:
@@ -157,8 +157,8 @@ def sendQQMail():
         message['To'] = ','.join('receiver_name{}<{}>'.format(index, i) for index, i in enumerate(receivers))
 
     subject = application['name']
-    print(message['From'])
-    print(message['To'])
+    print(receivers=="138950128@qq.com",mail_user=="wangweilve@163.com")
+
     message['Subject'] = Header(subject, 'utf-8')
 
     smtpObj = smtplib.SMTP_SSL(mail_host, mail_port)
