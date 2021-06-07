@@ -100,7 +100,7 @@ class Robot {
                     msgs.forEach(function (val, index) {
                         that.sendMsg(val.reply, AUTHOR.AUTHOR)
                     })
-
+                    that.talkMsg = ''
                 })
             },
             appendDialog: function appendDialog(id) {
@@ -120,7 +120,6 @@ class Robot {
                 this.isTyping = true
 
                 var dialog = this.getDialog(id)
-
                 getRandomMsg(dialog.details).forEach(function (content) {
                     _this2.msgChain = _this2.msgChain.then(function () {
                         return delay(700)
@@ -249,7 +248,15 @@ class Robot {
                 let nextAuthor = null
 
                 if (response.event) {
-                    res = this.generateApology(response.content)
+                    res = response.content
+                    nextAuthor = "load"+response.event
+                    // 手动添加语料, details 是双重列表
+                    this.dialogs.fromMe.push({
+                        id: nextAuthor,
+                        details : [
+                            [this.generateApology(response.content)]
+                        ]
+                    })
                 } else {
                     res = response.content
                     nextAuthor = response.nextAuthor
